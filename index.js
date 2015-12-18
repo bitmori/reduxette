@@ -1,37 +1,56 @@
-let is = (type, obj) => {
-    let klass = Object.prototype.toString.call(obj).slice(8, -1);
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+var is = function is(type, obj) {
+    var klass = Object.prototype.toString.call(obj).slice(8, -1);
     return obj !== undefined && obj !== null && klass.toLowerCase() === type.toLowerCase();
 };
 
-let isNot = (type, obj) => !is(type, obj);
+var isNot = function isNot(type, obj) {
+    return !is(type, obj);
+};
 
-export const Enum = (...args) => args.reduce((r, i) => (r[i] = i, r), {});
-
-export const Factory = (updater, state) => {
-    let listeners = [];
-
-    if (isNot(`function`, updater)) {
-        throw new TypeError(`The 'updater' must be a function`);
+var Enum = exports.Enum = function Enum() {
+    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+        args[_key] = arguments[_key];
     }
 
-    let getState = () => state;
+    return args.reduce(function (r, i) {
+        return r[i] = i, r;
+    }, {});
+};
 
-    let dispatch = action => {
+var Factory = exports.Factory = function Factory(updater, state) {
+    var listeners = [];
+
+    if (isNot("function", updater)) {
+        throw new TypeError("The 'updater' must be a function");
+    }
+
+    var getState = function getState() {
+        return state;
+    };
+
+    var dispatch = function dispatch(action) {
         action = action || {};
         state = updater(state, action);
-        listeners.slice().forEach(fn => fn(action));
+        listeners.slice().forEach(function (fn) {
+            return fn(action);
+        });
         return action;
     };
 
-    let subscribe = fn => {
+    var subscribe = function subscribe(fn) {
         listeners.push(fn);
-        return (callback) => {
-            if (is(`function`, callback)) {
+        return function (callback) {
+            if (is("function", callback)) {
                 callback();
             }
             return listeners.splice(listeners.indexOf(fn), 1);
         };
     };
 
-    return { getState, dispatch, subscribe };
+    return { getState: getState, dispatch: dispatch, subscribe: subscribe };
 };
