@@ -1,0 +1,20 @@
+{
+  "name": "reduxette",
+  "version": "0.1.0",
+  "description": "ECMAScript 6 port of chopped-redux, an implementation of @gaearon Redux",
+  "keywords": [
+    "flux",
+    "redux",
+    "state"
+  ],
+  "homepage": "https://github.com/neonmori/reduxette",
+  "main": "index.js",
+  "author": "neonmori <kirkgit@gmail.com>",
+  "repository": "neonmori/reduxette",
+  "bugs": {
+    "url": "https://github.com/neonmori/reduxette/issues",
+    "email": "kirkgit@gmail.com"
+  },
+  "license": "MIT",
+  "dependencies": {}
+}
