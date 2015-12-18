@@ -1,6 +1,6 @@
 {
   "name": "reduxette",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "ECMAScript 6 port of chopped-redux, an implementation of @gaearon Redux",
   "keywords": [
     "flux",
@@ -16,5 +16,12 @@
     "email": "kirkgit@gmail.com"
   },
   "license": "MIT",
-  "dependencies": {}
+  "dependencies": {},
+  "devDependencies": {
+    "babel-preset-es2015": "^6.3.13"
+  },
+  "scripts": {
+    "compile": "babel --presets es2015 src/index.js --out-file index.js",
+    "prepublish": "npm run compile"
+  }
 }
